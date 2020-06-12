@@ -1,0 +1,123 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$mcheckbox-checked-disabled-name: 'mcheckbox-checked-disabled';
+$mcheckbox-checked-disabled-x: 0px;
+$mcheckbox-checked-disabled-y: 0px;
+$mcheckbox-checked-disabled-offset-x: 0px;
+$mcheckbox-checked-disabled-offset-y: 0px;
+$mcheckbox-checked-disabled-width: 16px;
+$mcheckbox-checked-disabled-height: 16px;
+$mcheckbox-checked-disabled-total-width: 34px;
+$mcheckbox-checked-disabled-total-height: 34px;
+$mcheckbox-checked-disabled-image: '../images/sprite.png';
+$mcheckbox-checked-disabled: (0px, 0px, 0px, 0px, 16px, 16px, 34px, 34px, '../images/sprite.png', 'mcheckbox-checked-disabled', );
+$mcheckbox-checked-name: 'mcheckbox-checked';
+$mcheckbox-checked-x: 18px;
+$mcheckbox-checked-y: 0px;
+$mcheckbox-checked-offset-x: -18px;
+$mcheckbox-checked-offset-y: 0px;
+$mcheckbox-checked-width: 16px;
+$mcheckbox-checked-height: 16px;
+$mcheckbox-checked-total-width: 34px;
+$mcheckbox-checked-total-height: 34px;
+$mcheckbox-checked-image: '../images/sprite.png';
+$mcheckbox-checked: (18px, 0px, -18px, 0px, 16px, 16px, 34px, 34px, '../images/sprite.png', 'mcheckbox-checked', );
+$mcheckbox-default-disabled-name: 'mcheckbox-default-disabled';
+$mcheckbox-default-disabled-x: 0px;
+$mcheckbox-default-disabled-y: 18px;
+$mcheckbox-default-disabled-offset-x: 0px;
+$mcheckbox-default-disabled-offset-y: -18px;
+$mcheckbox-default-disabled-width: 16px;
+$mcheckbox-default-disabled-height: 16px;
+$mcheckbox-default-disabled-total-width: 34px;
+$mcheckbox-default-disabled-total-height: 34px;
+$mcheckbox-default-disabled-image: '../images/sprite.png';
+$mcheckbox-default-disabled: (0px, 18px, 0px, -18px, 16px, 16px, 34px, 34px, '../images/sprite.png', 'mcheckbox-default-disabled', );
+$mcheckbox-default-name: 'mcheckbox-default';
+$mcheckbox-default-x: 18px;
+$mcheckbox-default-y: 18px;
+$mcheckbox-default-offset-x: -18px;
+$mcheckbox-default-offset-y: -18px;
+$mcheckbox-default-width: 16px;
+$mcheckbox-default-height: 16px;
+$mcheckbox-default-total-width: 34px;
+$mcheckbox-default-total-height: 34px;
+$mcheckbox-default-image: '../images/sprite.png';
+$mcheckbox-default: (18px, 18px, -18px, -18px, 16px, 16px, 34px, 34px, '../images/sprite.png', 'mcheckbox-default', );
+$spritesheet-width: 34px;
+$spritesheet-height: 34px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: ($mcheckbox-checked-disabled, $mcheckbox-checked, $mcheckbox-default-disabled, $mcheckbox-default, );
+$spritesheet: (34px, 34px, '../images/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

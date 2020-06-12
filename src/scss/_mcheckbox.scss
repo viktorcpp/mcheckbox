@@ -1,0 +1,61 @@
+
+@mixin clr()
+{
+    &:after
+    {
+        content:    '';
+        display:    block;
+        height:     0px;
+        clear:      both;
+        visibility: hidden;
+    }
+
+} // @mixin clr
+
+.form-item
+{
+    @include clr;
+
+} // .form-item
+
+.cbox-fake
+{
+    @include sprite($mcheckbox-default);
+
+    float:      left;
+    margin:     0 10px 0 0;
+    width:      16px;
+    height:     16px;
+    overflow:   hidden;
+    text-align: center;
+
+    input[type=checkbox]
+    {
+        display: inline-block;
+        margin:  0;
+        padding: 0;
+        width:   100%;
+        height:  100%;
+        opacity: 0;
+
+    } // input[type=checkbox]
+
+} // .cbox-fake
+
+.cbox-fake-checked
+{
+    @extend .cbox-fake;
+    @include sprite($mcheckbox-checked);
+}
+
+.cbox-fake-disabled
+{
+    @extend .cbox-fake;
+    @include sprite($mcheckbox-default-disabled);
+}
+
+.cbox-fake-checked-disabled
+{
+    @extend .cbox-fake;
+    @include sprite($mcheckbox-checked-disabled);
+}

@@ -1,0 +1,25 @@
+
+html, body
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:   14px;
+    line-height: 120%;
+    color:       #000;
+
+} // html, body
+
+.ignoreit
+{
+    width:  800px;
+    margin: 50px auto;
+
+} // .ignoreit
+
+.form-item
+{
+    margin: 0 0 3px;
+
+} // .form-item
+
+@import "sprite";
+@import "mcheckbox";
